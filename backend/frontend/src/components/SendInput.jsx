@@ -1,7 +1,8 @@
-import React, {useState } from 'react'
+import React, { useState } from 'react'
 import { IoSend } from "react-icons/io5";
+import { FiSmile, FiPaperclip } from "react-icons/fi";
 import axios from "axios";
-import {useDispatch,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMessages } from '../redux/messageSlice';
 import { BASE_URL } from '..';
 
@@ -13,6 +14,8 @@ const SendInput = () => {
 
     const onSubmitHandler = async (e) => {
         e.preventDefault();
+        if (!message.trim()) return;
+        
         try {
             const res = await axios.post(`${BASE_URL}/api/v1/message/send/${selectedUser?._id}`, {message}, {
                 headers:{
@@ -26,21 +29,36 @@ const SendInput = () => {
         } 
         setMessage("");
     }
+    
     return (
-        <form onSubmit={onSubmitHandler} className='px-4 my-3'>
-            <div className='w-full relative'>
-                <input
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    type="text"
-                    placeholder='Send a message...'
-                    className='border text-sm rounded-lg block w-full p-3 border-zinc-500 bg-gray-600 text-white'
-                />
-                <button type="submit" className='absolute flex inset-y-0 end-0 items-center pr-4'>
-                    <IoSend />
+        <div className="p-3 bg-slate-100 dark:bg-slate-800 border-t border-blue-200/10">
+            <form onSubmit={onSubmitHandler} className='flex items-center gap-2'>
+                <div className='flex items-center gap-2 px-3'>
+                    <button type="button" className="text-blue-500 hover:text-blue-600 transition-colors" aria-label="Add attachment">
+                        <FiPaperclip className="w-5 h-5" />
+                    </button>
+                    <button type="button" className="text-blue-500 hover:text-blue-600 transition-colors" aria-label="Add emoji">
+                        <FiSmile className="w-5 h-5" />
+                    </button>
+                </div>
+                <div className='flex-1 relative'>
+                    <input
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        type="text"
+                        placeholder='Type your message...'
+                        className='w-full p-3 pr-12 rounded-full border-2 border-blue-200/30 focus:border-blue-400 focus:outline-none bg-white/80 dark:bg-slate-700 dark:text-white text-sm transition-all'
+                    />
+                </div>
+                <button 
+                    type="submit" 
+                    disabled={!message.trim()}
+                    className={`rounded-full p-3 ${message.trim() ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-400 cursor-not-allowed'} text-white transition-colors`}
+                >
+                    <IoSend className="w-5 h-5" />
                 </button>
-            </div>
-        </form>
+            </form>
+        </div>
     )
 }
 

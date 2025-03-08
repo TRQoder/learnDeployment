@@ -39,30 +39,31 @@ const Sidebar = () => {
         }
     }
     return (
-        <div className='w-full md:w-80 border-r border-white/20 p-4 flex flex-col bg-black/20'>
-            <form onSubmit={searchSubmitHandler} className='flex items-center gap-2'>
-                <input
-                    value={search}
-                    onChange={(e)=>setSearch(e.target.value)}
-                    className='input input-bordered rounded-lg flex-1 bg-white/10 text-white placeholder-gray-400 border-white/20 focus:border-purple-500 transition-all'
-                    type="text"
-                    placeholder='Search...'
-                />
-                <button type='submit' className='btn bg-purple-600 hover:bg-purple-700 text-white border-none'>
-                    <BiSearchAlt2 className='w-5 h-5 outline-none'/>
-                </button>
-            </form>
-            <div className="divider before:bg-white/20 after:bg-white/20"></div>
-            <div className="flex-1 overflow-y-auto custom-scrollbar">
-                <OtherUsers/>
-            </div>
-            <div className='mt-4 flex justify-center'>
+        <div className='w-full md:w-80 border-r border-blue-200/30 p-4 flex flex-col bg-white/10 backdrop-filter backdrop-blur-lg'>
+            <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold text-white">Chats</h2>
                 <button 
                     onClick={logoutHandler} 
-                    className='btn btn-sm bg-red-500 hover:bg-red-600 text-white border-none w-full max-w-xs transition-all duration-300 transform hover:scale-105'
+                    className='btn btn-sm bg-red-500 hover:bg-red-600 text-white border-none px-4 transition-all duration-300'
                 >
                     Logout
                 </button>
+            </div>
+            <form onSubmit={searchSubmitHandler} className='flex items-center gap-2 mb-4'>
+                <input
+                    value={search}
+                    onChange={(e)=>setSearch(e.target.value)}
+                    className='input input-bordered rounded-lg flex-1 bg-white/20 text-white placeholder-gray-300 border-blue-200/30 focus:border-blue-400 transition-all'
+                    type="text"
+                    placeholder='Search users...'
+                />
+                <button type='submit' className='btn bg-blue-600 hover:bg-blue-700 text-white border-none'>
+                    <BiSearchAlt2 className='w-5 h-5 outline-none'/>
+                </button>
+            </form>
+            <div className="divider before:bg-blue-200/30 after:bg-blue-200/30 my-2">Users</div>
+            <div className="flex-1 overflow-y-auto custom-scrollbar pr-1">
+                <OtherUsers/>
             </div>
         </div>
     )
