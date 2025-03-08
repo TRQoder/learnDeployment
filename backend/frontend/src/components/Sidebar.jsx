@@ -39,22 +39,30 @@ const Sidebar = () => {
         }
     }
     return (
-        <div className='border-r border-slate-500 p-4 flex flex-col'>
-            <form onSubmit={searchSubmitHandler} action="" className='flex items-center gap-2'>
+        <div className='w-full md:w-80 border-r border-white/20 p-4 flex flex-col bg-black/20'>
+            <form onSubmit={searchSubmitHandler} className='flex items-center gap-2'>
                 <input
                     value={search}
                     onChange={(e)=>setSearch(e.target.value)}
-                    className='input input-bordered rounded-md' type="text"
+                    className='input input-bordered rounded-lg flex-1 bg-white/10 text-white placeholder-gray-400 border-white/20 focus:border-purple-500 transition-all'
+                    type="text"
                     placeholder='Search...'
                 />
-                <button type='submit' className='btn bg-zinc-700 text-white'>
-                    <BiSearchAlt2 className='w-6 h-6 outline-none'/>
+                <button type='submit' className='btn bg-purple-600 hover:bg-purple-700 text-white border-none'>
+                    <BiSearchAlt2 className='w-5 h-5 outline-none'/>
                 </button>
             </form>
-            <div className="divider px-3"></div> 
-            <OtherUsers/> 
-            <div className='mt-2'>
-                <button onClick={logoutHandler} className='btn btn-sm'>Logout</button>
+            <div className="divider before:bg-white/20 after:bg-white/20"></div>
+            <div className="flex-1 overflow-y-auto custom-scrollbar">
+                <OtherUsers/>
+            </div>
+            <div className='mt-4 flex justify-center'>
+                <button 
+                    onClick={logoutHandler} 
+                    className='btn btn-sm bg-red-500 hover:bg-red-600 text-white border-none w-full max-w-xs transition-all duration-300 transform hover:scale-105'
+                >
+                    Logout
+                </button>
             </div>
         </div>
     )

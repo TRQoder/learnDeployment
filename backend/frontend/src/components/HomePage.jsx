@@ -13,9 +13,11 @@ const HomePage = () => {
     }
   }, []);
   return (
-    <div className='flex sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
-      <Sidebar />
-      <MessageContainer />
+    <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-purple-900 to-violet-800 p-4 flex items-center justify-center">
+      <div className='w-full max-w-7xl flex flex-col md:flex-row h-[90vh] rounded-lg overflow-hidden bg-white/10 backdrop-blur-lg shadow-2xl'>
+        <Sidebar />
+        <MessageContainer />
+      </div>
     </div>
   )
 }
